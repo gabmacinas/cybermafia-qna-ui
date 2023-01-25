@@ -29,7 +29,11 @@ function App() {
   const [currentMessage, setCurrentMessage] = useState(1);
   const [textBoxHandler, setTextBoxHandler] = useState(null);
   const [inputForm, setInputForm] = useState([]);
-
+  let audio = new Audio('/sound.mp3');
+  let click = new Audio('/click.wav');
+  audio.volume = 0.5;
+  audio.loop = true;
+  
   const makeid = (length) => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -41,6 +45,9 @@ function App() {
   }
 
   const continueBtn = () => {
+    // check if audio is playing
+    click.play();
+    if (currentMessage === 1) audio.play();
     if (currentMessage >= 7 && currentMessage <= 13) {
       // focus
       document.getElementById('inputBox').focus();
@@ -100,6 +107,7 @@ function App() {
     setTimeout(() => {
       // document.getElementById('contBtn').classList.remove('hidden');
     },5000);
+    // audio.loop = true;
   }, []);
 
   return (
