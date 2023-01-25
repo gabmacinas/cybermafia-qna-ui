@@ -56,9 +56,9 @@ function App() {
   const showNextMessage = () => {
     document.getElementById(`msg${currentMessage - 1 }`).classList.add('hidden');
     document.getElementById(`msg${currentMessage}`).classList.remove('hidden');
-    if (currentMessage >= 6 && currentMessage <= 13) {
-      document.getElementById('contBtn').classList.add('disable');
-      document.getElementById('contBtn').classList.remove('animate-flicker');
+    if (currentMessage >= 6 && currentMessage <= 14) {
+      // document.getElementById('contBtn').classList.add('disable');
+      // document.getElementById('contBtn').classList.remove('animate-flicker');
       const inputVal = document.getElementById('inputBox').value;
       setInputForm(inputForm => [...inputForm, inputVal.replace(/[^a-zA-Z0-9 @-]/g, '')]);
       document.getElementById('inputBox').value = '';
@@ -131,7 +131,7 @@ function App() {
         src={null}
         alt=''
         id='contBtn'
-        className={`overlay ${currentMessage > 14 || currentMessage === 1 ? 'hidden' : 'hidden'}`}
+        className={`overlay hidden`}
         onClick={continueBtn}
       />
       <img
