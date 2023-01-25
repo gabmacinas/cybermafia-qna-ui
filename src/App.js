@@ -3,8 +3,9 @@ import './App.css';
 // import textBox from './img/text-box.png';
 import capo from './img/capo.png';
 import animatedTextBox from './img/textBox.gif';
+import textBoxHandlerInput from './img/left_dia_box.png';
 import init from './img/initiate.png';
-import contBtn from './img/contBtn.png';
+// import contBtn from './img/contBtn.png';
 import message1 from './img/text-1.png';
 import message2 from './img/text-2.png';
 import message3 from './img/text-3.png';
@@ -22,6 +23,7 @@ import message14 from './img/text-14.png';
 import message15 from './img/text-15.png';
 import message16 from './img/text-16.png';
 import message17 from './img/text-17.png';
+import message18 from './img/text-18.png';
 
 function App() {
   const [currentMessage, setCurrentMessage] = useState(1);
@@ -82,8 +84,8 @@ function App() {
       if (e.key === 'Enter') {
         continueBtn();
       } 
-      document.getElementById('contBtn').classList.remove('disable');
-      document.getElementById('contBtn').classList.add('animate-flicker');
+      // document.getElementById('contBtn').classList.remove('disable');
+      // document.getElementById('contBtn').classList.add('animate-flicker');
     }
   };
 
@@ -96,7 +98,7 @@ function App() {
       document.getElementById('msg1').classList.remove('hidden');
     },2000)
     setTimeout(() => {
-      document.getElementById('contBtn').classList.remove('hidden');
+      // document.getElementById('contBtn').classList.remove('hidden');
     },5000);
   }, []);
 
@@ -123,26 +125,26 @@ function App() {
       <img id='msg15' src={message15} alt='' className='overlay hidden' />
       <img id='msg16' src={message16} alt='' className='overlay hidden' />
       <img id='msg17' src={message17} alt='' className='overlay hidden' />
-
+      <img id='msg17' src={message18} alt='' className='overlay hidden' />
 
       <img
-        src={contBtn}
+        src={null}
         alt=''
         id='contBtn'
-        className={`overlay ${currentMessage > 13 || currentMessage === 1 ? 'hidden' : 'show animate-flicker'}`}
+        className={`overlay ${currentMessage > 14 || currentMessage === 1 ? 'hidden' : 'hidden'}`}
         onClick={continueBtn}
       />
       <img
-        src={textBoxHandler}
+        src={textBoxHandlerInput}
         id='inputBoxBg'
         alt=''
-        className={`overlay-flip input-box  ${currentMessage > 6 && currentMessage <= 13 ? 'show' : 'hidden'}`}
+        className={`overlay-flip input-box  ${currentMessage > 6 && currentMessage <= 14 ? 'show' : 'hidden'}`}
       />
       <input
         type='text'
         id='inputBox'
         name='inputBox'
-        className={`input-overlay ${currentMessage > 6 && currentMessage <= 13 ? 'show' : 'hidden'}`}
+        className={`input-overlay ${currentMessage > 6 && currentMessage <= 14 ? 'show' : 'hidden'}`}
         placeholder='Enter Here'
         onKeyDown={handleKeydown}
       ></input>

@@ -45,17 +45,13 @@ html {
     right: 0;
     height: 100%;
     width: 100%;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    -webkit-filter: hue-rotate(180deg);
-    filter: hue-rotate(180deg);
 }
 
 .input-overlay {
     position: absolute;
     top: 24%;
     bottom: 0;
-    left: 31%;
+    left: 28%;
     right: 0;
     width: 41%;
     height: 10%;
