@@ -20,10 +20,6 @@ import message11 from './img/text-11.png';
 import message12 from './img/text-12.png';
 import message13 from './img/text-13.png';
 import message14 from './img/text-14.png';
-import message15 from './img/text-15.png';
-import message16 from './img/text-16.png';
-import message17 from './img/text-17.png';
-import message18 from './img/text-18.png';
 
 function App() {
   const [currentMessage, setCurrentMessage] = useState(1);
@@ -48,7 +44,7 @@ function App() {
     // check if audio is playing
     click.play();
     if (currentMessage === 1) audio.play();
-    if (currentMessage >= 7 && currentMessage <= 13) {
+    if (currentMessage >= 7 && currentMessage <= 12) {
       // focus
       document.getElementById('inputBox').focus();
       const inputVal = document.getElementById('inputBox').value;
@@ -63,31 +59,30 @@ function App() {
   const showNextMessage = () => {
     document.getElementById(`msg${currentMessage - 1 }`).classList.add('hidden');
     document.getElementById(`msg${currentMessage}`).classList.remove('hidden');
-    if (currentMessage >= 6 && currentMessage <= 14) {
+    if (currentMessage >= 6 && currentMessage <= 12) {
       // document.getElementById('contBtn').classList.add('disable');
       // document.getElementById('contBtn').classList.remove('animate-flicker');
       const inputVal = document.getElementById('inputBox').value;
-      setInputForm(inputForm => [...inputForm, inputVal.replace(/[^a-zA-Z0-9 @-]/g, '')]);
+      setInputForm((inputForm) => [...inputForm, inputVal.replace(/[^a-zA-Z0-9 @-]/g, '')]);
       document.getElementById('inputBox').value = '';
-    } else if (currentMessage === 17) {
-      document.getElementById('capo').classList.add('fade-out');
-      document.getElementById('init').classList.add('fade-out');
-      console.log(inputForm);
-      // window.location.href = 'https://www.google.com';
+    } else if (currentMessage === 13) {
       fetch('https://glmwjmund2.execute-api.us-east-1.amazonaws.com/submission', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${makeid(32)}`
+          Authorization: `Bearer ${makeid(32)}`,
         },
-        body: JSON.stringify({data: inputForm})
+        body: JSON.stringify({ data: inputForm }),
       });
+    } else if (currentMessage === 14) {
+      document.getElementById('capo').classList.add('fade-out');
+      document.getElementById('init').classList.add('fade-out');
     }
   }
 
   const handleKeydown = (e) => {
     // check key if value is more than 3
-    if (e.target.value.length > 3) {
+    if (e.target.value.length >= 3) {
       if (e.key === 'Enter') {
         continueBtn();
       } 
@@ -130,10 +125,6 @@ function App() {
       <img id='msg12' src={message12} alt='' className='overlay hidden' />
       <img id='msg13' src={message13} alt='' className='overlay hidden' />
       <img id='msg14' src={message14} alt='' className='overlay hidden' />
-      <img id='msg15' src={message15} alt='' className='overlay hidden' />
-      <img id='msg16' src={message16} alt='' className='overlay hidden' />
-      <img id='msg17' src={message17} alt='' className='overlay hidden' />
-      <img id='msg17' src={message18} alt='' className='overlay hidden' />
 
       <img
         src={null}
@@ -146,13 +137,13 @@ function App() {
         src={textBoxHandlerInput}
         id='inputBoxBg'
         alt=''
-        className={`overlay-flip input-box  ${currentMessage > 6 && currentMessage <= 14 ? 'show' : 'hidden'}`}
+        className={`overlay-flip input-box  ${currentMessage > 6 && currentMessage <= 12 ? 'show' : 'hidden'}`}
       />
       <input
         type='text'
         id='inputBox'
         name='inputBox'
-        className={`input-overlay ${currentMessage > 6 && currentMessage <= 14 ? 'show' : 'hidden'}`}
+        className={`input-overlay ${currentMessage > 6 && currentMessage <= 12? 'show' : 'hidden'}`}
         placeholder='Enter Here'
         onKeyDown={handleKeydown}
       ></input>
