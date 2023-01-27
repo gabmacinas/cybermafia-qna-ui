@@ -77,6 +77,10 @@ function App() {
       } else if (currentMessage === 16) {
         document.getElementById('capo').classList.add('fade-out');
         document.getElementById('init').classList.add('fade-out');
+        // settimeout 1 sec redirect
+        setTimeout(() => {
+          window.location.href = 'http://cybermafia.cc';
+        }, 1500);
       }
     } catch (e) {}
   };
