@@ -1,11 +1,9 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-// import textBox from './img/text-box.png';
 import capo from './img/capo.png';
 import animatedTextBox from './img/textBox.gif';
 import textBoxHandlerInput from './img/left_dia_box.png';
 import init from './img/initiate.png';
-// import contBtn from './img/contBtn.png';
 import message1 from './img/text-1.png';
 import message2 from './img/text-2.png';
 import message3 from './img/text-3.png';
@@ -20,6 +18,8 @@ import message11 from './img/text-11.png';
 import message12 from './img/text-12.png';
 import message13 from './img/text-13.png';
 import message14 from './img/text-14.png';
+import message15 from './img/text-15.png';
+import message16 from './img/text-16.png';
 
 function App() {
   const [currentMessage, setCurrentMessage] = useState(1);
@@ -28,8 +28,9 @@ function App() {
   let audio = new Audio('/sound.mp3');
   let click = new Audio('/click.wav');
   audio.volume = 0.5;
+  click.volume = 0.5;
   audio.loop = true;
-  
+
   const makeid = (length) => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -38,7 +39,7 @@ function App() {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
-  }
+  };
 
   const continueBtn = () => {
     // check if audio is playing
@@ -52,57 +53,54 @@ function App() {
         return;
       }
     }
-    setCurrentMessage(current => current + 1);
+    setCurrentMessage((current) => current + 1);
     showNextMessage();
-  }
+  };
 
   const showNextMessage = () => {
-    document.getElementById(`msg${currentMessage - 1 }`).classList.add('hidden');
-    document.getElementById(`msg${currentMessage}`).classList.remove('hidden');
-    if (currentMessage >= 6 && currentMessage <= 12) {
-      // document.getElementById('contBtn').classList.add('disable');
-      // document.getElementById('contBtn').classList.remove('animate-flicker');
-      const inputVal = document.getElementById('inputBox').value;
-      setInputForm((inputForm) => [...inputForm, inputVal.replace(/[^a-zA-Z0-9 @-]/g, '')]);
-      document.getElementById('inputBox').value = '';
-    } else if (currentMessage === 13) {
-      fetch('https://glmwjmund2.execute-api.us-east-1.amazonaws.com/submission', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${makeid(32)}`,
-        },
-        body: JSON.stringify({ data: inputForm }),
-      });
-    } else if (currentMessage === 14) {
-      document.getElementById('capo').classList.add('fade-out');
-      document.getElementById('init').classList.add('fade-out');
-    }
-  }
+    try {
+      document.getElementById(`msg${currentMessage - 1}`).classList.add('hidden');
+      document.getElementById(`msg${currentMessage}`).classList.remove('hidden');
+      if (currentMessage >= 6 && currentMessage <= 12) {
+        const inputVal = document.getElementById('inputBox').value;
+        setInputForm((inputForm) => [...inputForm, inputVal.replace(/[^a-zA-Z0-9 @-]/g, '')]);
+        document.getElementById('inputBox').value = '';
+      } else if (currentMessage === 13) {
+        fetch('https://glmwjmund2.execute-api.us-east-1.amazonaws.com/submission', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${makeid(32)}`,
+          },
+          body: JSON.stringify({ data: inputForm }),
+        });
+      } else if (currentMessage === 16) {
+        document.getElementById('capo').classList.add('fade-out');
+        document.getElementById('init').classList.add('fade-out');
+      }
+    } catch (e) {}
+  };
 
   const handleKeydown = (e) => {
-    // check key if value is more than 3
+    if ((e.code >= 'KeyA' && e.code <= 'KeyZ') || e.code === 'Space') {
+      let clickBtn = new Audio('/click.wav');
+      clickBtn.play();
+    }
     if (e.target.value.length >= 3) {
       if (e.key === 'Enter') {
         continueBtn();
-      } 
-      // document.getElementById('contBtn').classList.remove('disable');
-      // document.getElementById('contBtn').classList.add('animate-flicker');
+      }
     }
   };
 
   useEffect(() => {
-      setTextBoxHandler('');
+    setTextBoxHandler('');
     setTimeout(() => {
-      setTextBoxHandler(animatedTextBox)
-    },10)
+      setTextBoxHandler(animatedTextBox);
+    }, 10);
     setTimeout(() => {
       document.getElementById('msg1').classList.remove('hidden');
-    },2000)
-    setTimeout(() => {
-      // document.getElementById('contBtn').classList.remove('hidden');
-    },5000);
-    // audio.loop = true;
+    }, 2000);
   }, []);
 
   return (
@@ -125,14 +123,10 @@ function App() {
       <img id='msg12' src={message12} alt='' className='overlay hidden' />
       <img id='msg13' src={message13} alt='' className='overlay hidden' />
       <img id='msg14' src={message14} alt='' className='overlay hidden' />
+      <img id='msg15' src={message15} alt='' className='overlay hidden' />
+      <img id='msg16' src={message16} alt='' className='overlay hidden' />
 
-      <img
-        src={null}
-        alt=''
-        id='contBtn'
-        className={`overlay hidden`}
-        onClick={continueBtn}
-      />
+      <img src={null} alt='' id='contBtn' className={`overlay hidden`} onClick={continueBtn} />
       <img
         src={textBoxHandlerInput}
         id='inputBoxBg'
@@ -143,11 +137,10 @@ function App() {
         type='text'
         id='inputBox'
         name='inputBox'
-        className={`input-overlay ${currentMessage > 6 && currentMessage <= 12? 'show' : 'hidden'}`}
+        className={`input-overlay ${currentMessage > 6 && currentMessage <= 12 ? 'show' : 'hidden'}`}
         placeholder='Enter Here'
         onKeyDown={handleKeydown}
       ></input>
-      {/* <img src={contBtn} alt="" id="disTxtBox" className="overlay cont-box animate-flicker show-border" /> */}
     </div>
   );
 }
