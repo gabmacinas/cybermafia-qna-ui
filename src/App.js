@@ -79,7 +79,7 @@ function App() {
         document.getElementById('init').classList.add('fade-out');
         // settimeout 1 sec redirect
         setTimeout(() => {
-          window.location.href = 'https://twitter.com/intent/tweet?text=I%20have%20completed%20my%20initiation%20for%20%40cybermafianft_%0A%0AMy%20discord%20is%3A%20%0AIf%20you%20haven%27t,%20you%20can%20do%20your%20initiation%20here%3A%20https%3A//apply.cybermafia.cc/%0A%0A%23Cybermafia%20%23Initiation';
+          window.location.href = 'https://twitter.com/intent/tweet?text=I%20have%20completed%20my%20initiation%20for%20%40cybermafianft_%20%E2%9D%A4%EF%B8%8F%E2%80%8D%F0%9F%94%A5%0A%0AIf%20you%20haven%27t%20done%20yours,%20you%20can%20do%20it%20here%3A%0Ahttps%3A//apply.cybermafia.cc/%20%F0%9F%9A%AC%0A%0AMay%20the%20Godfather%20be%20in%20your%20favor%20%F0%9F%AB%A1%0A%0AMy%20Discord%20Username%3A%20%0A%23CYBERMAFIA';
         }, 1500);
       }
     } catch (e) {}
