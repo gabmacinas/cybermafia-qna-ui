@@ -79,7 +79,7 @@ function App() {
         document.getElementById('init').classList.add('fade-out');
         // settimeout 1 sec redirect
         setTimeout(() => {
-          window.location.href = 'http://cybermafia.cc';
+          window.location.href = 'https://twitter.com/intent/tweet?text=I%20have%20completed%20my%20initiation%20for%20%40cybermafianft_%0A%0AMy%20discord%20is%3A%20%0AIf%20you%20haven%27t,%20you%20can%20do%20your%20initiation%20here%3A%20https%3A//apply.cybermafia.cc/%0A%0A%23Cybermafia%20%23Initiation';
         }, 1500);
       }
     } catch (e) {}
